@@ -10,6 +10,7 @@ app = Flask(__name__)
 # NOTE: IMPORTANT
 """
 I decided to use chatgpt to make this webpage. I did this for a couple reasons.
+
 1) This was extra on top of the assignment so I was not subtracting any value
     or the integruity of the assignment.
 2) I'm in a deep learning course right now and it is timely relavent for me to
