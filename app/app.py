@@ -60,15 +60,24 @@ HTML_TEMPLATE = """
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        input_text = request.form['inputText']
-        noise_power = 0 if request.form.get('noisePower', 0) == '' else float(request.form.get('noisePower', 0))
-        noise_gen = False if noise_power == 0 else True
-        input_bits = string_to_bits(input_text)
-        modulated_text = bpsk_modulate(input_bits, noise_gen=noise_gen, noise_power=noise_power)
-        plot_url = create_plot(modulated_text)
-        demodulated_text = bpsk_demodulate(modulated_text).decode(encoding="ascii", errors="replace")
-    return render_template_string(HTML_TEMPLATE, input_text=input_text, noise_power=noise_power, modulated_text=modulated_text, demodulated_text=demodulated_text,plot_url=plot_url)
+  input_text = ""
+  noise_power = ""
+  modulated_text = ""
+  demodulated_text = ""
+  plot_url = create_plot(np.ndarray([]))
+  if request.method == 'POST':
+    input_text = request.form['inputText']
+    noise_power = 0 if request.form.get('noisePower', 0) == '' else float(request.form.get('noisePower', 0))
+    noise_gen = False if noise_power == 0 else True
+    input_bits = string_to_bits(input_text)
+    modulated_text = bpsk_modulate(input_bits, noise_gen=noise_gen, noise_power=noise_power)
+    plot_url = create_plot(modulated_text)
+    demodulated_text = bpsk_demodulate(modulated_text).decode(encoding="ascii", errors="replace")
+    if input_text is None:
+      input_text = ""
+    if noise_power is None:
+      noise_power = 0;
+  return render_template_string(HTML_TEMPLATE, input_text=input_text, noise_power=noise_power, modulated_text=modulated_text, demodulated_text=demodulated_text,plot_url=plot_url)
 
 # Generate a Matplotlib image and return it as a base64 encoded string
 def create_plot(modulated_text):
