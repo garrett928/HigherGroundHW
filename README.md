@@ -8,6 +8,13 @@ Setup a python environment to keep your local environment clean.
 2) `source ./env/bin/activate`
 3) `pip install -r requirements.txt`
 
+## build docker
+1) `docker build --tag bpsk .`
+2) check the image exist with `docker iamages`
+   
+## run docker
+1) `docker run -p 5000:5000 bpsk`
+
 # Useful resources
 I knew the background of a lot of this before doing this project but I had not written any code to handle of this before. Even still, I found the docs for pysdy to be super well written and easy to follow. Definitly worth a read!
 
