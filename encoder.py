@@ -24,14 +24,17 @@ def main():
     # print(f"Modulated prompt, elements 0-4: {prompt_modulated[:5]}")
 
     # plot the Constellation
-    # plt.plot(np.real(prompt_modulated), np.imag(prompt_modulated), '.')
-    # plt.grid(True)
-    # plt.xlabel("I")
-    # plt.ylabel("Q")
-    # plt.ylim((-1.5, 1.5))
-    # plt.xlim((-1.5, 1.5))
-    # plt.title("BPSK modulated prompt Constellation")
-    # plt.show()
+    # this will only be visible before you hit a key to continue
+    plt.plot(np.real(prompt_modulated), np.imag(prompt_modulated), '.')
+    plt.grid(True)
+    plt.xlabel("I")
+    plt.ylabel("Q")
+    plt.ylim((-1.5, 1.5))
+    plt.xlim((-1.5, 1.5))
+    plt.title("BPSK modulated prompt Constellation")
+    plt.show(block=False)
+    plt.pause(0.001)
+    input("Press any key to continue....")
 
     # demod the IQ
     prompt_demodulated = bpsk_demodulate(prompt_modulated)
